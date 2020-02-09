@@ -533,5 +533,10 @@ namespace Behavior_Tree_Designer
             msToolStripMenuItem.Checked = false;
             msToolStripMenuItem1.Checked = true;
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new AboutBox1().ShowDialog(this);
+        }
     }
 }

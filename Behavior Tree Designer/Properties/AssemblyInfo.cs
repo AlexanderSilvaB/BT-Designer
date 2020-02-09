@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Behavior Tree Designer")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("This is a simple behavior tree designer developed for scientific purposes. Anyone is free to use, edit and distribute the software.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Alexander S. Barbosa")]
 [assembly: AssemblyProduct("Behavior Tree Designer")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]

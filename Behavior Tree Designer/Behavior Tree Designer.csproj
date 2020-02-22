@@ -54,6 +54,8 @@
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </Compile>
     <Compile Include="FlipperNode.cs" />
+    <Compile Include="FailureNode.cs" />
+    <Compile Include="SuccessNode.cs" />
     <Compile Include="InverterNode.cs" />
     <Compile Include="ActionNode.cs" />
     <Compile Include="Form1.cs">
@@ -143,6 +145,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\iconfinder_time-24_103169.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_check-circle-outline-blank_326565.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_false-cross-reject-decline_2075833 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_true-check-accept-approve_2075831.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_false-cross-reject-decline_2075833.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_true-check-accept-approve_2075831 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_false-cross-reject.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_true-check-accept.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

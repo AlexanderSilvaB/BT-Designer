@@ -14,6 +14,7 @@ namespace Behavior_Tree_Designer
         public ActionNode() : base(NodeType.Leaf)
         {
             Text = "Action name";
+            Tag = "Action";
         }
 
         public override bool DoubleClick()

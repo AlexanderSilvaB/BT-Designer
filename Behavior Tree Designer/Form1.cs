@@ -28,6 +28,19 @@ namespace Behavior_Tree_Designer
         {
             InitializeComponent();
 
+            Node.Init();
+
+            Node.Register("Action", typeof(ActionNode));
+            Node.Register("Condition", typeof(ConditionNode));
+            Node.Register("Flipper", typeof(FlipperNode));
+            Node.Register("Inverter", typeof(InverterNode));
+            Node.Register("BehaviorTree", typeof(RootNode));
+            Node.Register("Selector", typeof(SelectorNode));
+            Node.Register("Sequence", typeof(SequenceNode));
+            Node.Register("Success", typeof(SuccessNode));
+            Node.Register("Failure", typeof(FailureNode));
+            Node.Register("Node", typeof(Node));
+
             titleBase = Text;
 
             root = null;
@@ -42,7 +55,7 @@ namespace Behavior_Tree_Designer
             diagramPanel.MouseWheel += DiagramPanel_MouseWheel;
 
             timer = new Timer();
-            timer.Interval = 1000;
+            timer.Interval = 100;
             timer.Tick += Timer_Tick;
             if(Node.DrawStatus)
                 timer.Start();
@@ -135,6 +148,20 @@ namespace Behavior_Tree_Designer
             saved = false;
         }
 
+        private void btTrue_Click(object sender, EventArgs e)
+        {
+            root.AddOpen(new SuccessNode());
+            diagramPanel.Invalidate();
+            saved = false;
+        }
+
+        private void btFalse_Click(object sender, EventArgs e)
+        {
+            root.AddOpen(new FailureNode());
+            diagramPanel.Invalidate();
+            saved = false;
+        }
+
         private void btnFlipper_Click(object sender, EventArgs e)
         {
             root.AddOpen(new FlipperNode());
@@ -203,7 +230,15 @@ namespace Behavior_Tree_Designer
             {
                 if(root != null)
                 {
-                    root.Remove();
+                    root.Remove(e.Shift);
+                    diagramPanel.Invalidate();
+                }
+            }
+            else if(e.KeyCode == Keys.D && e.Control)
+            {
+                if(root != null)
+                {
+                    root.Detach();
                     diagramPanel.Invalidate();
                 }
             }
@@ -220,9 +255,13 @@ namespace Behavior_Tree_Designer
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "BT files (*.bt)|*.bt";
-            dialog.FilterIndex = 0;
+            dialog.Filter = "BT Files (*.bt)|*.bt|XML Files (*.xml)|*.xml|Behavior Tree Files(*.bt;*.xml)|*.bt;*.xml";
+            dialog.FilterIndex = 3;
             dialog.RestoreDirectory = true;
+            if (fileName != null)
+                dialog.FileName = Path.GetFileName(fileName);
+            else
+                dialog.FileName = "Untitled.bt";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 fileName = dialog.FileName;
@@ -242,9 +281,11 @@ namespace Behavior_Tree_Designer
             }
 
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "BT files (*.bt)|*.bt";
-            dialog.FilterIndex = 0;
+            dialog.Filter = "BT Files (*.bt)|*.bt|XML Files (*.xml)|*.xml|Behavior Tree Files(*.bt;*.xml)|*.bt;*.xml";
+            dialog.FilterIndex = 3;
             dialog.RestoreDirectory = true;
+            if (fileName != null)
+                dialog.FileName = Path.GetFileName(fileName);
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 fileName = dialog.FileName;
@@ -306,9 +347,21 @@ namespace Behavior_Tree_Designer
             try
             {
                 Stream stream = new FileStream(fileName, FileMode.Open);
-                BinaryFormatter b = new BinaryFormatter();
-                RootNode root = (RootNode)b.Deserialize(stream);
-                stream.Close();
+                RootNode root = null;
+                if (fileName.EndsWith(".bt"))
+                {
+                    BinaryFormatter b = new BinaryFormatter();
+                    root = (RootNode)b.Deserialize(stream);
+                    stream.Close();
+                }
+                else
+                {
+                    StreamReader reader = new StreamReader(stream);
+                    root = (RootNode)Node.Import(reader.ReadToEnd());
+                    reader.Close();
+                    root.Move(diagramPanel.Width / 2, root.Height, alignGrid, gridSize);
+                    root.AutoArrange();
+                }
                 return root;
 
             }
@@ -323,9 +376,19 @@ namespace Behavior_Tree_Designer
             try
             {
                 Stream stream = new FileStream(fileName, FileMode.OpenOrCreate);
-                BinaryFormatter b = new BinaryFormatter();
-                b.Serialize(stream, root);
-                stream.Close();
+                if (fileName.EndsWith(".xml"))
+                {
+                    string xml = root.Export();
+                    StreamWriter writer = new StreamWriter(stream);
+                    writer.Write(xml);
+                    writer.Close();
+                }
+                else
+                {
+                    BinaryFormatter b = new BinaryFormatter();
+                    b.Serialize(stream, root);
+                    stream.Close();
+                }
                 return true;
             }
             catch (Exception ex)
@@ -413,9 +476,13 @@ namespace Behavior_Tree_Designer
                 timer.Stop();
             antiAlias = true;
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "PNG files (*.png)|*.png";
+            dialog.Filter = "PNG Files (*.png)|*.png";
             dialog.FilterIndex = 0;
             dialog.RestoreDirectory = true;
+            string name = fileName;
+            if (name == null)
+                name = "Untitled.bt";
+            dialog.FileName = Path.ChangeExtension(Path.GetFileName(name), ".png");
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 Bitmap newBitmap = new Bitmap(diagramPanel.Width, diagramPanel.Height);
@@ -423,6 +490,111 @@ namespace Behavior_Tree_Designer
                 newBitmap.Save(dialog.FileName);
             }
             if(Node.DrawStatus)
+                timer.Start();
+            antiAlias = antialiasingToolStripMenuItem.Checked;
+        }
+
+        private void exportToLaTeXToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if(root == null)
+            {
+                MessageBox.Show("Nothing to export");
+                return;
+            }
+
+            if (timer.Enabled)
+                timer.Stop();
+            antiAlias = true;
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "Tex Files (*.tex)|*.tex|Text Files (*.txt)|*.txt";
+            dialog.FilterIndex = 0;
+            dialog.RestoreDirectory = true;
+            string name = fileName;
+            if (name == null)
+                name = "Untitled.bt";
+            dialog.FileName = Path.ChangeExtension(Path.GetFileName(name), ".tex");
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                string tex = root.GenerateTex();
+                if(tex != null)
+                {
+                    try
+                    {
+                        StreamWriter writer = new StreamWriter(dialog.OpenFile());
+                        writer.Write(tex);
+                        writer.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Could not write the file.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Could not generate the LaTeX file.");
+                }
+            }
+            if (Node.DrawStatus)
+                timer.Start();
+            antiAlias = antialiasingToolStripMenuItem.Checked;
+        }
+
+        private void exportToLateXToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (root == null)
+            {
+                MessageBox.Show("Nothing to export");
+                return;
+            }
+
+            Node node = root.Selected();
+            if (node == null)
+                node = root;
+
+            string append = node.Text;
+            if (append == null)
+                append = "Root";
+
+            foreach (char c in System.IO.Path.GetInvalidFileNameChars())
+            {
+                append = append.Replace(c, '_');
+            }
+            append = append.Replace('.', '_');
+            append = append.Replace(' ', '_');
+
+            if (timer.Enabled)
+                timer.Stop();
+            antiAlias = true;
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "Tex Files (*.tex)|*.tex|Text Files (*.txt)|*.txt";
+            dialog.FilterIndex = 0;
+            dialog.RestoreDirectory = true;
+            string name = fileName;
+            if (name == null)
+                name = "Untitled_"+ append+".bt";
+            dialog.FileName = Path.GetFileNameWithoutExtension(name) + "_" + append + ".tex";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                string tex = node.GenerateTex();
+                if (tex != null)
+                {
+                    try
+                    {
+                        StreamWriter writer = new StreamWriter(dialog.OpenFile());
+                        writer.Write(tex);
+                        writer.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Could not write the file.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Could not generate the LaTeX file.");
+                }
+            }
+            if (Node.DrawStatus)
                 timer.Start();
             antiAlias = antialiasingToolStripMenuItem.Checked;
         }
@@ -460,8 +632,8 @@ namespace Behavior_Tree_Designer
         private void importBTToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "BT files (*.bt)|*.bt";
-            dialog.FilterIndex = 0;
+            dialog.Filter = "BT Files (*.bt)|*.bt|XML Files (*.xml)|*.xml|Behavior Tree Files(*.bt;*.xml)|*.bt;*.xml";
+            dialog.FilterIndex = 3;
             dialog.RestoreDirectory = true;
             if (dialog.ShowDialog() == DialogResult.OK)
             {

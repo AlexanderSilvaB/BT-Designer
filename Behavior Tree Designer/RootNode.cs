@@ -24,6 +24,8 @@ namespace Behavior_Tree_Designer
         public RootNode() : base(NodeType.Decorator)
         {
             Transform(Height, Height);
+            Tag = "BehaviorTree";
+            Text = "MainTree";
             image = Resources.iconfinder_block_326541;
             AllNodes = new List<Node>();
             SelectedNode = null;
@@ -34,6 +36,10 @@ namespace Behavior_Tree_Designer
             MoveX = 0;
             MoveY = 0;
             Zoom = 1.0f;
+            if (ButtonIcon == null)
+            {
+                ButtonIcon = Resources.iconfinder_check_circle_outline_blank_326565;
+            }
         }
 
         public void AddOpen(Node node)
@@ -41,23 +47,43 @@ namespace Behavior_Tree_Designer
             AllNodes.Add(node);
         }
 
-        public new void Remove()
+        public void Detach()
+        {
+            if (SelectedNode != null && SelectedNode != this)
+            {
+                SelectedNode.Remove();
+                SelectedNode.Release();
+            }
+        }
+
+        public void Remove(bool onlyCurrent)
         {
             if(SelectedNode != null && SelectedNode != this)
             {
-                RemoveFromOpen(SelectedNode, true);
+                RemoveFromOpen(SelectedNode, true, onlyCurrent);
                 SelectedNode = null;
             }
         }
 
-        private void RemoveFromOpen(Node node, bool inner)
+        private void RemoveFromOpen(Node node, bool inner, bool onlyCurrent)
         {
             if(inner)
                 node.Remove();
-            AllNodes.Remove(node);
-            for(int i = 0; i < node.Nodes.Count; i++)
+            if (!onlyCurrent)
             {
-                RemoveFromOpen(node.Nodes[i], false);
+                AllNodes.Remove(node);
+                for (int i = 0; i < node.Nodes.Count; i++)
+                {
+                    RemoveFromOpen(node.Nodes[i], false, onlyCurrent);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < node.Nodes.Count; i++)
+                {
+                    node.Nodes[i].Release();
+                }
+                AllNodes.Remove(node);
             }
         }
 
@@ -116,6 +142,11 @@ namespace Behavior_Tree_Designer
             }
             if(SelectedNode != null)
                 SelectedNode.IsFocused = true;
+        }
+
+        public Node Selected()
+        {
+            return SelectedNode;
         }
 
         public void PointerStart(MouseEventArgs e)
@@ -211,7 +242,7 @@ namespace Behavior_Tree_Designer
             return false;
         }
 
-        public override void Run()
+        public void Run()
         {
             if(Nodes.Count > 0)
             {

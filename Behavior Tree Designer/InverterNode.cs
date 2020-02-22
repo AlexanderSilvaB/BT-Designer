@@ -14,12 +14,19 @@ namespace Behavior_Tree_Designer
         public InverterNode() : base(NodeType.Decorator)
         {
             Icon = Resources.iconfinder_UnitedArrowUpDown_1031499__1_;
+            Tag = "Inverter";
             SmallIcon = true;
             Text = "Inverter";
         }
 
-        public override void Run()
+        public override bool Run(NodeStatus status)
         {
+            if (!base.Run(status))
+            {
+                if(Nodes.Count > 0)
+                    Nodes[0].Run(status);
+                return false;
+            }
             if (Nodes.Count == 0)
                 Status = NodeStatus.Success;
             else
@@ -32,6 +39,7 @@ namespace Behavior_Tree_Designer
                 else
                     Status = NodeStatus.Running;
             }
+            return true;
         }
     }
 }

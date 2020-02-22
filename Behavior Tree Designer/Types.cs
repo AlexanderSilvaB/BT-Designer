@@ -8,7 +8,7 @@ namespace Behavior_Tree_Designer
 {
     public enum NodeStatus
     {
-        Success, Failure, Running
+        Success, Failure, Running, Unknown, None
     }
 
     public enum NodeType

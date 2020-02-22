@@ -13,15 +13,14 @@ namespace Behavior_Tree_Designer
     {
         public ConditionNode() : base(NodeType.Leaf)
         {
-            Icon = Resources.iconfinder_triangle_up_293707;
+            Tag = "Condition";
             Text = "C1 > C2";
+            IsEllipse = true;
         }
 
         public override bool DoubleClick()
         {
             if (Status == NodeStatus.Success)
-                Status = NodeStatus.Running;
-            else if (Status == NodeStatus.Running)
                 Status = NodeStatus.Failure;
             else
                 Status = NodeStatus.Success;

@@ -15,12 +15,15 @@ namespace Behavior_Tree_Designer
         public FlipperNode() : base(NodeType.Leaf)
         {
             Text = "Flipper\n\nAll";
+            Tag = "Flipper";
             Icon = Resources.iconfinder_clock_226587;
             SmallIcon = true;
         }
 
-        public override void Run()
+        public override bool Run(NodeStatus status)
         {
+            if (!base.Run(status))
+                return false;
             if (all)
             {
                 if (Status == NodeStatus.Success)
@@ -37,6 +40,7 @@ namespace Behavior_Tree_Designer
                 else
                     Status = NodeStatus.Success;
             }
+            return true;
         }
 
         public override bool KeyPress(char key)

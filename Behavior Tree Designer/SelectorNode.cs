@@ -14,24 +14,31 @@ namespace Behavior_Tree_Designer
         public SelectorNode() : base(NodeType.Composite)
         {
             Icon = Resources.iconfinder_question_1608802;
+            Tag = "Selector";
             Text = "Selector";
         }
 
-        public override void Run()
+        public override bool Run(NodeStatus status)
         {
-            Status = NodeStatus.Running;
+            Status = NodeStatus.Failure;
+            if (status == NodeStatus.None)
+                Status = NodeStatus.None;
+            NodeStatus forced = status;
             for (int i = 0; i < Nodes.Count; i++)
             {
-                Nodes[i].Run();
-                if (Nodes[i].Status == NodeStatus.Running)
-                    return;
-                else if (Nodes[i].Status == NodeStatus.Success)
+                Nodes[i].Run(forced);
+                if (forced == NodeStatus.Unknown && Nodes[i].Status == NodeStatus.Running)
+                {
+                    Status = NodeStatus.Running;
+                    forced = NodeStatus.None;
+                }
+                else if (forced == NodeStatus.Unknown && Nodes[i].Status == NodeStatus.Success)
                 {
                     Status = NodeStatus.Success;
-                    return;
+                    forced = NodeStatus.None;
                 }
             }
-            Status = NodeStatus.Failure;
+            return true;
         }
     }
 }

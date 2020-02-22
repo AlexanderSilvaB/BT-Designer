@@ -133,9 +133,39 @@ namespace Behavior_Tree_Designer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_check_circle_outline_blank_326565 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_check_circle_outline_blank_326565", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iconfinder_clock_226587 {
             get {
                 object obj = ResourceManager.GetObject("iconfinder_clock_226587", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_false_cross_reject {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_false_cross_reject", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_false_cross_reject_decline_2075833 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_false_cross_reject_decline_2075833", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -166,6 +196,26 @@ namespace Behavior_Tree_Designer.Properties {
         internal static System.Drawing.Bitmap iconfinder_triangle_up_293707 {
             get {
                 object obj = ResourceManager.GetObject("iconfinder_triangle_up_293707", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_true_check_accept {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_true_check_accept", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_true_check_accept_approve_2075831__1_ {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_true_check_accept_approve_2075831__1_", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

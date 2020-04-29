@@ -24,6 +24,7 @@ namespace Behavior_Tree_Designer
                 Status = NodeStatus.Failure;
             else
                 Status = NodeStatus.Success;
+            PropagateStatus();
             return true;
         }
     }

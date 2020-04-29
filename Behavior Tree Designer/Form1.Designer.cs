@@ -38,9 +38,9 @@
             this.importBTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToLaTeXToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToLateXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportToLateXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -177,6 +177,16 @@
             this.exportToLaTeXToolStripMenuItem1.Text = "Export to LaTeX";
             this.exportToLaTeXToolStripMenuItem1.Click += new System.EventHandler(this.exportToLaTeXToolStripMenuItem1_Click);
             // 
+            // exportToLateXToolStripMenuItem
+            // 
+            this.exportToLateXToolStripMenuItem.Name = "exportToLateXToolStripMenuItem";
+            this.exportToLateXToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.E)));
+            this.exportToLateXToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.exportToLateXToolStripMenuItem.Text = "Export selected to LaTeX";
+            this.exportToLateXToolStripMenuItem.Click += new System.EventHandler(this.exportToLateXToolStripMenuItem_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -188,16 +198,6 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // exportToLateXToolStripMenuItem
-            // 
-            this.exportToLateXToolStripMenuItem.Name = "exportToLateXToolStripMenuItem";
-            this.exportToLateXToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.E)));
-            this.exportToLateXToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
-            this.exportToLateXToolStripMenuItem.Text = "Export selected to LaTeX";
-            this.exportToLateXToolStripMenuItem.Click += new System.EventHandler(this.exportToLateXToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -339,6 +339,8 @@
             // 
             // antialiasingToolStripMenuItem
             // 
+            this.antialiasingToolStripMenuItem.Checked = true;
+            this.antialiasingToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.antialiasingToolStripMenuItem.Name = "antialiasingToolStripMenuItem";
             this.antialiasingToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.antialiasingToolStripMenuItem.Text = "Anti-aliasing";

@@ -40,6 +40,7 @@ namespace Behavior_Tree_Designer
                 else
                     Status = NodeStatus.Success;
             }
+            PropagateStatus();
             return true;
         }
 

@@ -50,7 +50,7 @@ namespace Behavior_Tree_Designer
             drawGrid = true;
             gridSize = 10;
             alignGrid = true;
-            antiAlias = false;
+            antiAlias = true;
 
             diagramPanel.MouseWheel += DiagramPanel_MouseWheel;
 
@@ -226,6 +226,11 @@ namespace Behavior_Tree_Designer
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            if(root != null)
+            {
+                root.Ctrl(false);
+            }
+
             if(e.KeyCode == Keys.Delete)
             {
                 if(root != null)
@@ -240,6 +245,21 @@ namespace Behavior_Tree_Designer
                 {
                     root.Detach();
                     diagramPanel.Invalidate();
+                }
+            }
+            else if (e.KeyCode == Keys.R && e.Control)
+            {
+                if (root != null)
+                {
+                    root.ClearReferences();
+                    diagramPanel.Invalidate();
+                }
+            }
+            else if (e.Control)
+            {
+                if (root != null)
+                {
+                    root.Ctrl(true);
                 }
             }
         }

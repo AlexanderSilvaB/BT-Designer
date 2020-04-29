@@ -41,6 +41,9 @@ namespace Behavior_Tree_Designer
         public static Dictionary<string, Type> Factory;
 
         protected bool IsEllipse { get; set; }
+        public List<Node> References { get; private set; }
+        private double PropagateHash;
+
         public Node(NodeType type)
         {
             Id = GetHashCode();
@@ -61,6 +64,8 @@ namespace Behavior_Tree_Designer
             Parent = null;
             Tag = "Node";
             IsEllipse = false;
+            References = new List<Node>();
+            PropagateHash = 0;
             if (LinePen == null)
             {
                 Init();
@@ -188,6 +193,49 @@ namespace Behavior_Tree_Designer
         public virtual bool DoubleClick()
         {
             return false;
+        }
+
+        public void AddReference(Node node)
+        {
+            if (References == null)
+                References = new List<Node>();
+            if(!References.Contains(node))
+                References.Add(node);
+        }
+
+        public void RemoveReference(Node node)
+        {
+            if (References == null)
+                References = new List<Node>();
+            References.Remove(node);
+        }
+
+        public virtual void ClearReferences()
+        {
+            if (References == null)
+                References = new List<Node>();
+            foreach (Node node in References)
+            {
+                node.RemoveReference(this);
+            }
+            References.Clear();
+        }
+
+        protected void PropagateStatus(double hash = 0)
+        {
+            if (References == null)
+                References = new List<Node>();
+            if (hash == 0)
+                hash = new Random().NextDouble();
+            if (hash == PropagateHash)
+                return;
+            PropagateHash = hash;
+            foreach (Node node in References)
+            {
+                node.Status = Status;
+                node.PropagateStatus(PropagateHash);
+            }
+
         }
 
         public virtual bool KeyPress(char key)
@@ -361,6 +409,7 @@ namespace Behavior_Tree_Designer
         {
             float x = Width / 2;
             float y = Height / 2;
+
             if (IsEllipse)
             {
                 graphics.DrawEllipse(GetPen(), X - x, Y - y, Width, Height);

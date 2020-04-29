@@ -21,6 +21,8 @@ namespace Behavior_Tree_Designer
         public float MoveX { get; private set; }
         public float MoveY { get; private set; }
         public float Zoom { get; private set; }
+        private bool CtrlEnabled;
+        private bool Referencing;
         public RootNode() : base(NodeType.Decorator)
         {
             Transform(Height, Height);
@@ -36,6 +38,8 @@ namespace Behavior_Tree_Designer
             MoveX = 0;
             MoveY = 0;
             Zoom = 1.0f;
+            CtrlEnabled = false;
+            Referencing = false;
             if (ButtonIcon == null)
             {
                 ButtonIcon = Resources.iconfinder_check_circle_outline_blank_326565;
@@ -89,9 +93,23 @@ namespace Behavior_Tree_Designer
 
         public override void Draw(Graphics graphics)
         {
+            for (int i = 0; i < AllNodes.Count; i++)
+            {
+                if (AllNodes[i].References != null)
+                {
+                    foreach (Node node in AllNodes[i].References)
+                    {
+                        graphics.DrawLine(Pens.CornflowerBlue, AllNodes[i].X, AllNodes[i].Y, node.X, node.Y);
+                    }
+                }
+            }
+
             if (Dragging)
             {
-                graphics.DrawLine(LinePen, SelectedNode.X, SelectedNode.Y + SelectedNode.Height / 2 + 5, DragX, DragY);
+                if(Referencing)
+                    graphics.DrawLine(LinePen, SelectedNode.X, SelectedNode.Y, DragX, DragY);
+                else
+                    graphics.DrawLine(LinePen, SelectedNode.X, SelectedNode.Y + SelectedNode.Height / 2 + 5, DragX, DragY);
             }
 
             base.Draw(graphics);
@@ -161,6 +179,15 @@ namespace Behavior_Tree_Designer
                 DragRealX = e.X;
                 DragRealY = e.Y;
             }
+            else if(SelectedNode != null && SelectedNode.Type == NodeType.Leaf && CtrlEnabled)
+            {
+                Dragging = true;
+                Referencing = true;
+                DragX = x;
+                DragY = y;
+                DragRealX = e.X;
+                DragRealY = e.Y;
+            }
             else
             {
                 SelectAndFocus(x, y);
@@ -178,15 +205,28 @@ namespace Behavior_Tree_Designer
             float y = (e.Y - MoveY) / Zoom;
             Dragging = false;
             Moving = false;
+            CtrlEnabled = false;
             if (SelectedNode != null)
             {
                 Node selected = Select(x, y);
                 if (selected != null && selected != SelectedNode)
                 {
-                    if (SelectedNode.CanAdd())
-                        SelectedNode.Add(selected);
+                    if (Referencing)
+                    {
+                        if (selected.GetType() == SelectedNode.GetType() )
+                        {
+                            SelectedNode.AddReference(selected);
+                            selected.AddReference(SelectedNode);
+                        }
+                    }
+                    else
+                    {
+                        if (SelectedNode.CanAdd())
+                            SelectedNode.Add(selected);
+                    }
                 }
             }
+            Referencing = false;
         }
 
         public bool PointerMove(MouseEventArgs e, int gridSize, bool align)
@@ -240,6 +280,19 @@ namespace Behavior_Tree_Designer
                 return SelectedNode.KeyPress(key);
             }
             return false;
+        }
+
+        public override void ClearReferences()
+        {
+            if (SelectedNode != null && SelectedNode != this)
+            {
+                SelectedNode.ClearReferences();
+            }
+        }
+
+        public void Ctrl(bool ctrl)
+        {
+            CtrlEnabled = ctrl;
         }
 
         public void Run()

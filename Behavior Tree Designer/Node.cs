@@ -242,7 +242,7 @@ namespace Behavior_Tree_Designer
         {
             int L = 17;
             if (IsEllipse)
-                L = 10;
+                L = 16;
             if (Text == null)
                 Text = "";
             if (key == '\b')
@@ -450,7 +450,7 @@ namespace Behavior_Tree_Designer
             if(!(this is RootNode) && Text != null)
             {
                 if(IsEllipse)
-                    graphics.DrawString(Text, SystemFonts.MessageBoxFont, Brushes.Black, new RectangleF(X - x + 8, Y - y + 8, Width - 16, Height - 16), new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+                    graphics.DrawString(Text, SystemFonts.MessageBoxFont, Brushes.Black, new RectangleF(X - x + 2, Y - y + 2, Width - 4, Height - 4), new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
                 else
                     graphics.DrawString(Text, SystemFonts.MessageBoxFont, Brushes.Black, X, Y - y + 8, new StringFormat() { Alignment = StringAlignment.Center });
             }

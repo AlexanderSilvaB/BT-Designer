@@ -57,8 +57,12 @@ namespace Behavior_Tree_Designer
             timer = new Timer();
             timer.Interval = 100;
             timer.Tick += Timer_Tick;
-            if(Node.DrawStatus)
+            if (Node.DrawStatus)
+            {
+                if (root != null)
+                    root.Running(true);
                 timer.Start();
+            }
         }
 
         private void DiagramPanel_MouseWheel(object sender, MouseEventArgs e)
@@ -492,8 +496,12 @@ namespace Behavior_Tree_Designer
 
         private void exportAsImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(timer.Enabled)
+            if (timer.Enabled)
+            {
+                if (root != null)
+                    root.Running(false);
                 timer.Stop();
+            }
             antiAlias = true;
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "PNG Files (*.png)|*.png";
@@ -509,8 +517,12 @@ namespace Behavior_Tree_Designer
                 diagramPanel.DrawToBitmap(newBitmap, new Rectangle(0, 0, diagramPanel.Width, diagramPanel.Height));
                 newBitmap.Save(dialog.FileName);
             }
-            if(Node.DrawStatus)
+            if (Node.DrawStatus)
+            {
+                if(root != null)
+                    root.Running(true);
                 timer.Start();
+            }
             antiAlias = antialiasingToolStripMenuItem.Checked;
         }
 
@@ -523,7 +535,11 @@ namespace Behavior_Tree_Designer
             }
 
             if (timer.Enabled)
+            {
+                if (root != null)
+                    root.Running(false);
                 timer.Stop();
+            }
             antiAlias = true;
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "Tex Files (*.tex)|*.tex|Text Files (*.txt)|*.txt";
@@ -555,7 +571,11 @@ namespace Behavior_Tree_Designer
                 }
             }
             if (Node.DrawStatus)
+            {
+                if (root != null)
+                    root.Running(true);
                 timer.Start();
+            }
             antiAlias = antialiasingToolStripMenuItem.Checked;
         }
 
@@ -583,7 +603,11 @@ namespace Behavior_Tree_Designer
             append = append.Replace(' ', '_');
 
             if (timer.Enabled)
+            {
+                if (root != null)
+                    root.Running(false);
                 timer.Stop();
+            }
             antiAlias = true;
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "Tex Files (*.tex)|*.tex|Text Files (*.txt)|*.txt";
@@ -615,7 +639,11 @@ namespace Behavior_Tree_Designer
                 }
             }
             if (Node.DrawStatus)
+            {
+                if (root != null)
+                    root.Running(true);
                 timer.Start();
+            }
             antiAlias = antialiasingToolStripMenuItem.Checked;
         }
 
@@ -636,9 +664,17 @@ namespace Behavior_Tree_Designer
             Node.DrawStatus = !Node.DrawStatus;
             alwaysRunningToolStripMenuItem.Checked = Node.DrawStatus;
             if (Node.DrawStatus && !timer.Enabled)
+            {
+                if (root != null)
+                    root.Running(true);
                 timer.Start();
+            }
             else if (!Node.DrawStatus && timer.Enabled)
+            {
+                if (root != null)
+                    root.Running(false);
                 timer.Stop();
+            }
             diagramPanel.Invalidate();
         }
 

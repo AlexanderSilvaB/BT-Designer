@@ -23,6 +23,7 @@ namespace Behavior_Tree_Designer
         public float Zoom { get; private set; }
         private bool CtrlEnabled;
         private bool Referencing;
+        private bool running;
         public RootNode() : base(NodeType.Decorator)
         {
             Transform(Height, Height);
@@ -40,6 +41,7 @@ namespace Behavior_Tree_Designer
             Zoom = 1.0f;
             CtrlEnabled = false;
             Referencing = false;
+            running = false;
             if (ButtonIcon == null)
             {
                 ButtonIcon = Resources.iconfinder_check_circle_outline_blank_326565;
@@ -93,13 +95,16 @@ namespace Behavior_Tree_Designer
 
         public override void Draw(Graphics graphics)
         {
-            for (int i = 0; i < AllNodes.Count; i++)
+            if (!running)
             {
-                if (AllNodes[i].References != null)
+                for (int i = 0; i < AllNodes.Count; i++)
                 {
-                    foreach (Node node in AllNodes[i].References)
+                    if (AllNodes[i].References != null)
                     {
-                        graphics.DrawLine(Pens.CornflowerBlue, AllNodes[i].X, AllNodes[i].Y, node.X, node.Y);
+                        foreach (Node node in AllNodes[i].References)
+                        {
+                            graphics.DrawLine(Pens.CornflowerBlue, AllNodes[i].X, AllNodes[i].Y, node.X, node.Y);
+                        }
                     }
                 }
             }
@@ -213,11 +218,11 @@ namespace Behavior_Tree_Designer
                 {
                     if (Referencing)
                     {
-                        if (selected.GetType() == SelectedNode.GetType() )
-                        {
+                        //if (selected.GetType() == SelectedNode.GetType() )
+                        //{
                             SelectedNode.AddReference(selected);
                             selected.AddReference(SelectedNode);
-                        }
+                        //}
                     }
                     else
                     {
@@ -293,6 +298,11 @@ namespace Behavior_Tree_Designer
         public void Ctrl(bool ctrl)
         {
             CtrlEnabled = ctrl;
+        }
+
+        public void Running(bool running)
+        {
+            this.running = running;
         }
 
         public void Run()

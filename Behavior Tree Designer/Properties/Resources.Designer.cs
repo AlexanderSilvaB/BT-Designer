@@ -63,6 +63,16 @@ namespace Behavior_Tree_Designer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_parallel {
+            get {
+                object obj = ResourceManager.GetObject("icon_parallel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iconfinder_058_CircledArrowRight_183187__1_ {
             get {
                 object obj = ResourceManager.GetObject("iconfinder_058_CircledArrowRight_183187__1_", resourceCulture);
@@ -106,6 +116,16 @@ namespace Behavior_Tree_Designer.Properties {
         internal static System.Drawing.Bitmap iconfinder_78_Circle_Full_106138 {
             get {
                 object obj = ResourceManager.GetObject("iconfinder_78_Circle_Full_106138", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_arrow_7_393270 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_arrow_7_393270", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

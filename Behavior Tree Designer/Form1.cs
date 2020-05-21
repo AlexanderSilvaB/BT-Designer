@@ -37,6 +37,7 @@ namespace Behavior_Tree_Designer
             Node.Register("BehaviorTree", typeof(RootNode));
             Node.Register("Selector", typeof(SelectorNode));
             Node.Register("Sequence", typeof(SequenceNode));
+            Node.Register("Parallel", typeof(ParallelNode));
             Node.Register("Success", typeof(SuccessNode));
             Node.Register("Failure", typeof(FailureNode));
             Node.Register("Node", typeof(Node));
@@ -765,6 +766,13 @@ namespace Behavior_Tree_Designer
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new AboutBox1().ShowDialog(this);
+        }
+
+        private void btnParallel_Click(object sender, EventArgs e)
+        {
+            root.AddOpen(new ParallelNode());
+            diagramPanel.Invalidate();
+            saved = false;
         }
     }
 }

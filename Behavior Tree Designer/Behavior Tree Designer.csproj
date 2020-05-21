@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="FlipperNode.cs" />
     <Compile Include="FailureNode.cs" />
+    <Compile Include="ParallelNode.cs" />
     <Compile Include="SuccessNode.cs" />
     <Compile Include="InverterNode.cs" />
     <Compile Include="ActionNode.cs" />
@@ -166,6 +167,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\iconfinder_true-check-accept.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_parallel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_arrow_7_393270.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -68,15 +68,16 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsMenu = new System.Windows.Forms.ToolStrip();
+            this.diagramPanel = new System.Windows.Forms.PictureBox();
             this.btnSelector = new System.Windows.Forms.ToolStripButton();
             this.btnSequence = new System.Windows.Forms.ToolStripButton();
+            this.btnParallel = new System.Windows.Forms.ToolStripButton();
             this.btInverter = new System.Windows.Forms.ToolStripButton();
             this.btSuccess = new System.Windows.Forms.ToolStripButton();
             this.btFailure = new System.Windows.Forms.ToolStripButton();
             this.btnCondition = new System.Windows.Forms.ToolStripButton();
             this.btnAction = new System.Windows.Forms.ToolStripButton();
             this.btnFlipper = new System.Windows.Forms.ToolStripButton();
-            this.diagramPanel = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.optionsMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diagramPanel)).BeginInit();
@@ -427,6 +428,7 @@
             this.optionsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSelector,
             this.btnSequence,
+            this.btnParallel,
             this.btInverter,
             this.btSuccess,
             this.btFailure,
@@ -437,6 +439,21 @@
             this.optionsMenu.Name = "optionsMenu";
             this.optionsMenu.Size = new System.Drawing.Size(48, 426);
             this.optionsMenu.TabIndex = 2;
+            // 
+            // diagramPanel
+            // 
+            this.diagramPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.diagramPanel.Location = new System.Drawing.Point(0, 24);
+            this.diagramPanel.Name = "diagramPanel";
+            this.diagramPanel.Size = new System.Drawing.Size(752, 426);
+            this.diagramPanel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.diagramPanel.TabIndex = 3;
+            this.diagramPanel.TabStop = false;
+            this.diagramPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.diagramPanel_Paint);
+            this.diagramPanel.DoubleClick += new System.EventHandler(this.diagramPanel_DoubleClick);
+            this.diagramPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.diagramPanel_MouseDown);
+            this.diagramPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.diagramPanel_MouseMove);
+            this.diagramPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.diagramPanel_MouseUp);
             // 
             // btnSelector
             // 
@@ -461,6 +478,18 @@
             this.btnSequence.Size = new System.Drawing.Size(46, 46);
             this.btnSequence.Text = "Sequence";
             this.btnSequence.Click += new System.EventHandler(this.btnSequence_Click);
+            // 
+            // btnParallel
+            // 
+            this.btnParallel.AutoSize = false;
+            this.btnParallel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnParallel.Image = global::Behavior_Tree_Designer.Properties.Resources.icon_parallel;
+            this.btnParallel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnParallel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnParallel.Name = "btnParallel";
+            this.btnParallel.Size = new System.Drawing.Size(46, 46);
+            this.btnParallel.Text = "Parallel";
+            this.btnParallel.Click += new System.EventHandler(this.btnParallel_Click);
             // 
             // btInverter
             // 
@@ -533,21 +562,6 @@
             this.btnFlipper.Size = new System.Drawing.Size(46, 46);
             this.btnFlipper.Text = "Flipper";
             this.btnFlipper.Click += new System.EventHandler(this.btnFlipper_Click);
-            // 
-            // diagramPanel
-            // 
-            this.diagramPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.diagramPanel.Location = new System.Drawing.Point(0, 24);
-            this.diagramPanel.Name = "diagramPanel";
-            this.diagramPanel.Size = new System.Drawing.Size(752, 426);
-            this.diagramPanel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.diagramPanel.TabIndex = 3;
-            this.diagramPanel.TabStop = false;
-            this.diagramPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.diagramPanel_Paint);
-            this.diagramPanel.DoubleClick += new System.EventHandler(this.diagramPanel_DoubleClick);
-            this.diagramPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.diagramPanel_MouseDown);
-            this.diagramPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.diagramPanel_MouseMove);
-            this.diagramPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.diagramPanel_MouseUp);
             // 
             // Form1
             // 
@@ -624,6 +638,7 @@
         private System.Windows.Forms.ToolStripButton btSuccess;
         private System.Windows.Forms.ToolStripMenuItem exportToLaTeXToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exportToLateXToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton btnParallel;
     }
 }
 

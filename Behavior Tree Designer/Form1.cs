@@ -24,6 +24,8 @@ namespace Behavior_Tree_Designer
         int gridSize;
         bool alignGrid;
         bool antiAlias;
+
+        PluginLoader pluginLoader;
         public Form1()
         {
             InitializeComponent();
@@ -41,6 +43,10 @@ namespace Behavior_Tree_Designer
             Node.Register("Success", typeof(SuccessNode));
             Node.Register("Failure", typeof(FailureNode));
             Node.Register("Node", typeof(Node));
+
+            pluginLoader = new PluginLoader();
+            if (pluginLoader.LoadPlugins())
+                pluginLoader.Populate(optionsMenu);
 
             titleBase = Text;
 

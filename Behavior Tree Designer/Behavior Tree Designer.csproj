@@ -55,7 +55,9 @@
     </Compile>
     <Compile Include="FlipperNode.cs" />
     <Compile Include="FailureNode.cs" />
+    <Compile Include="INode.cs" />
     <Compile Include="ParallelNode.cs" />
+    <Compile Include="PluginLoader.cs" />
     <Compile Include="SuccessNode.cs" />
     <Compile Include="InverterNode.cs" />
     <Compile Include="ActionNode.cs" />

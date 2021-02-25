@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Behavior_Tree_Designer
+public enum NodeStatus
 {
-    public enum NodeStatus
-    {
-        Success, Failure, Running, Unknown, None
-    }
+    Success, Failure, Running, Unknown, None
+}
 
-    public enum NodeType
-    {
-        Composite, Decorator, Leaf
-    }
+public enum NodeType
+{
+    Composite, Decorator, Leaf
 }

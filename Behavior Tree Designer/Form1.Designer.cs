@@ -68,7 +68,6 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsMenu = new System.Windows.Forms.ToolStrip();
-            this.diagramPanel = new System.Windows.Forms.PictureBox();
             this.btnSelector = new System.Windows.Forms.ToolStripButton();
             this.btnSequence = new System.Windows.Forms.ToolStripButton();
             this.btnParallel = new System.Windows.Forms.ToolStripButton();
@@ -78,6 +77,7 @@
             this.btnCondition = new System.Windows.Forms.ToolStripButton();
             this.btnAction = new System.Windows.Forms.ToolStripButton();
             this.btnFlipper = new System.Windows.Forms.ToolStripButton();
+            this.diagramPanel = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.optionsMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diagramPanel)).BeginInit();
@@ -93,7 +93,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(812, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -435,17 +435,144 @@
             this.btnCondition,
             this.btnAction,
             this.btnFlipper});
-            this.optionsMenu.Location = new System.Drawing.Point(752, 24);
+            this.optionsMenu.Location = new System.Drawing.Point(764, 24);
             this.optionsMenu.Name = "optionsMenu";
-            this.optionsMenu.Size = new System.Drawing.Size(48, 426);
+            this.optionsMenu.Size = new System.Drawing.Size(48, 474);
             this.optionsMenu.TabIndex = 2;
+            // 
+            // btnSelector
+            // 
+            this.btnSelector.AutoSize = false;
+            this.btnSelector.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelector.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnSelector.Image = global::Behavior_Tree_Designer.Properties.Resources.iconfinder_question_1608802;
+            this.btnSelector.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnSelector.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSelector.Name = "btnSelector";
+            this.btnSelector.Size = new System.Drawing.Size(46, 32);
+            this.btnSelector.Text = "Selector";
+            this.btnSelector.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnSelector.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.btnSelector.Click += new System.EventHandler(this.btnSelector_Click);
+            // 
+            // btnSequence
+            // 
+            this.btnSequence.AutoSize = false;
+            this.btnSequence.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSequence.Image = global::Behavior_Tree_Designer.Properties.Resources.iconfinder_arrow_right_227601;
+            this.btnSequence.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnSequence.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSequence.Name = "btnSequence";
+            this.btnSequence.Size = new System.Drawing.Size(46, 32);
+            this.btnSequence.Text = "Sequence";
+            this.btnSequence.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnSequence.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.btnSequence.Click += new System.EventHandler(this.btnSequence_Click);
+            // 
+            // btnParallel
+            // 
+            this.btnParallel.AutoSize = false;
+            this.btnParallel.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnParallel.Image = global::Behavior_Tree_Designer.Properties.Resources.iconfinder_arrow_7_393270;
+            this.btnParallel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnParallel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnParallel.Name = "btnParallel";
+            this.btnParallel.Size = new System.Drawing.Size(46, 32);
+            this.btnParallel.Text = "Parallel";
+            this.btnParallel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnParallel.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.btnParallel.Click += new System.EventHandler(this.btnParallel_Click);
+            // 
+            // btInverter
+            // 
+            this.btInverter.AutoSize = false;
+            this.btInverter.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btInverter.Image = global::Behavior_Tree_Designer.Properties.Resources.iconfinder_UnitedArrowUpDown_1031499__1_;
+            this.btInverter.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btInverter.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btInverter.Name = "btInverter";
+            this.btInverter.Size = new System.Drawing.Size(46, 32);
+            this.btInverter.Text = "Inverter";
+            this.btInverter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btInverter.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.btInverter.Click += new System.EventHandler(this.Inverter_Click);
+            // 
+            // btSuccess
+            // 
+            this.btSuccess.AutoSize = false;
+            this.btSuccess.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSuccess.Image = global::Behavior_Tree_Designer.Properties.Resources.iconfinder_true_check_accept_approve_2075831__1_;
+            this.btSuccess.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btSuccess.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btSuccess.Name = "btSuccess";
+            this.btSuccess.Size = new System.Drawing.Size(46, 32);
+            this.btSuccess.Text = "Success";
+            this.btSuccess.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btSuccess.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.btSuccess.Click += new System.EventHandler(this.btTrue_Click);
+            // 
+            // btFailure
+            // 
+            this.btFailure.AutoSize = false;
+            this.btFailure.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btFailure.Image = global::Behavior_Tree_Designer.Properties.Resources.iconfinder_false_cross_reject_decline_2075833;
+            this.btFailure.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btFailure.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btFailure.Name = "btFailure";
+            this.btFailure.Size = new System.Drawing.Size(46, 32);
+            this.btFailure.Text = "Failure";
+            this.btFailure.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btFailure.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.btFailure.Click += new System.EventHandler(this.btFalse_Click);
+            // 
+            // btnCondition
+            // 
+            this.btnCondition.AutoSize = false;
+            this.btnCondition.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCondition.Image = global::Behavior_Tree_Designer.Properties.Resources.iconfinder_triangle_up_293707;
+            this.btnCondition.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnCondition.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCondition.Name = "btnCondition";
+            this.btnCondition.Size = new System.Drawing.Size(46, 32);
+            this.btnCondition.Text = "Condition";
+            this.btnCondition.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnCondition.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.btnCondition.Click += new System.EventHandler(this.btnCondition_Click);
+            // 
+            // btnAction
+            // 
+            this.btnAction.AutoSize = false;
+            this.btnAction.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAction.Image = global::Behavior_Tree_Designer.Properties.Resources.iconfinder_check_circle_outline_blank_326565;
+            this.btnAction.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnAction.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAction.Name = "btnAction";
+            this.btnAction.Size = new System.Drawing.Size(46, 32);
+            this.btnAction.Text = "Action";
+            this.btnAction.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnAction.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.btnAction.Click += new System.EventHandler(this.btnAction_Click);
+            // 
+            // btnFlipper
+            // 
+            this.btnFlipper.AutoSize = false;
+            this.btnFlipper.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFlipper.Image = global::Behavior_Tree_Designer.Properties.Resources.iconfinder_clock_226587;
+            this.btnFlipper.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnFlipper.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnFlipper.Name = "btnFlipper";
+            this.btnFlipper.Size = new System.Drawing.Size(46, 32);
+            this.btnFlipper.Text = "Flipper";
+            this.btnFlipper.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnFlipper.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.btnFlipper.Click += new System.EventHandler(this.btnFlipper_Click);
             // 
             // diagramPanel
             // 
             this.diagramPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.diagramPanel.Location = new System.Drawing.Point(0, 24);
             this.diagramPanel.Name = "diagramPanel";
-            this.diagramPanel.Size = new System.Drawing.Size(752, 426);
+            this.diagramPanel.Size = new System.Drawing.Size(764, 474);
             this.diagramPanel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.diagramPanel.TabIndex = 3;
             this.diagramPanel.TabStop = false;
@@ -455,119 +582,11 @@
             this.diagramPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.diagramPanel_MouseMove);
             this.diagramPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.diagramPanel_MouseUp);
             // 
-            // btnSelector
-            // 
-            this.btnSelector.AutoSize = false;
-            this.btnSelector.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSelector.Image = global::Behavior_Tree_Designer.Properties.Resources.iconfinder_164_QuestionMark_183285__1_;
-            this.btnSelector.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSelector.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSelector.Name = "btnSelector";
-            this.btnSelector.Size = new System.Drawing.Size(46, 46);
-            this.btnSelector.Text = "Selector";
-            this.btnSelector.Click += new System.EventHandler(this.btnSelector_Click);
-            // 
-            // btnSequence
-            // 
-            this.btnSequence.AutoSize = false;
-            this.btnSequence.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSequence.Image = global::Behavior_Tree_Designer.Properties.Resources.iconfinder_058_CircledArrowRight_183187__1_;
-            this.btnSequence.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSequence.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSequence.Name = "btnSequence";
-            this.btnSequence.Size = new System.Drawing.Size(46, 46);
-            this.btnSequence.Text = "Sequence";
-            this.btnSequence.Click += new System.EventHandler(this.btnSequence_Click);
-            // 
-            // btnParallel
-            // 
-            this.btnParallel.AutoSize = false;
-            this.btnParallel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnParallel.Image = global::Behavior_Tree_Designer.Properties.Resources.icon_parallel;
-            this.btnParallel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnParallel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnParallel.Name = "btnParallel";
-            this.btnParallel.Size = new System.Drawing.Size(46, 46);
-            this.btnParallel.Text = "Parallel";
-            this.btnParallel.Click += new System.EventHandler(this.btnParallel_Click);
-            // 
-            // btInverter
-            // 
-            this.btInverter.AutoSize = false;
-            this.btInverter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btInverter.Image = global::Behavior_Tree_Designer.Properties.Resources.iconfinder_224_ArrowUpDown_183341;
-            this.btInverter.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btInverter.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btInverter.Name = "btInverter";
-            this.btInverter.Size = new System.Drawing.Size(46, 46);
-            this.btInverter.Text = "Inverter";
-            this.btInverter.Click += new System.EventHandler(this.Inverter_Click);
-            // 
-            // btSuccess
-            // 
-            this.btSuccess.AutoSize = false;
-            this.btSuccess.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btSuccess.Image = global::Behavior_Tree_Designer.Properties.Resources.iconfinder_true_check_accept;
-            this.btSuccess.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btSuccess.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btSuccess.Name = "btSuccess";
-            this.btSuccess.Size = new System.Drawing.Size(46, 46);
-            this.btSuccess.Text = "Success";
-            this.btSuccess.Click += new System.EventHandler(this.btTrue_Click);
-            // 
-            // btFailure
-            // 
-            this.btFailure.AutoSize = false;
-            this.btFailure.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btFailure.Image = global::Behavior_Tree_Designer.Properties.Resources.iconfinder_false_cross_reject;
-            this.btFailure.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btFailure.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btFailure.Name = "btFailure";
-            this.btFailure.Size = new System.Drawing.Size(46, 46);
-            this.btFailure.Text = "Failure";
-            this.btFailure.Click += new System.EventHandler(this.btFalse_Click);
-            // 
-            // btnCondition
-            // 
-            this.btnCondition.AutoSize = false;
-            this.btnCondition.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnCondition.Image = global::Behavior_Tree_Designer.Properties.Resources.iconfinder_215_CircledBorderTriangleUp_183332;
-            this.btnCondition.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCondition.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCondition.Name = "btnCondition";
-            this.btnCondition.Size = new System.Drawing.Size(46, 46);
-            this.btnCondition.Text = "Condition";
-            this.btnCondition.Click += new System.EventHandler(this.btnCondition_Click);
-            // 
-            // btnAction
-            // 
-            this.btnAction.AutoSize = false;
-            this.btnAction.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnAction.Image = global::Behavior_Tree_Designer.Properties.Resources.iconfinder_78_Circle_Full_106138;
-            this.btnAction.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnAction.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAction.Name = "btnAction";
-            this.btnAction.Size = new System.Drawing.Size(46, 46);
-            this.btnAction.Text = "Action";
-            this.btnAction.Click += new System.EventHandler(this.btnAction_Click);
-            // 
-            // btnFlipper
-            // 
-            this.btnFlipper.AutoSize = false;
-            this.btnFlipper.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnFlipper.Image = global::Behavior_Tree_Designer.Properties.Resources.iconfinder_time_24_103169;
-            this.btnFlipper.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnFlipper.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnFlipper.Name = "btnFlipper";
-            this.btnFlipper.Size = new System.Drawing.Size(46, 46);
-            this.btnFlipper.Text = "Flipper";
-            this.btnFlipper.Click += new System.EventHandler(this.btnFlipper_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(812, 498);
             this.Controls.Add(this.diagramPanel);
             this.Controls.Add(this.optionsMenu);
             this.Controls.Add(this.menuStrip1);
